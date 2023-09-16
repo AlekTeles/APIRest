@@ -3,7 +3,8 @@
     "dotenv": "^16.3.1",
     "fastify": "^4.23.0",
     "knex": "^2.5.1",
-    "sqlite3": "^5.1.6"
+    "sqlite3": "^5.1.6",
+    "zod": "^3.22.2"
   },
   "name": "apirest",
   "version": "1.0.0",
