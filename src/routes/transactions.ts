@@ -4,22 +4,25 @@ import { knex } from '../database'
 import { randomUUID } from 'node:crypto'
 import { checkSessionIdExists } from '../middlewares/check-session-id-exists'
 
+// unitários: unidade da sua aplicação
+// integração: comunicação entre duas ou mais unidades
+// e2e - ponta a ponta: simulam um usuário operando na nossa aplicação
+
+// front-end: abre a págnia de login, digite o texto diego@rocketseat.com.br no campo com ID email, clique no botão
+// back-end: chamadaas HTTP, WebSockets
+
 export async function transactionsRoutes(app: FastifyInstance) {
-  app.get(
-    '/',
-    { preHandler: [checkSessionIdExists] },
-    async (request, reply) => {
-      const { sessionId } = request.cookies
+  app.get('/', { preHandler: [checkSessionIdExists] }, async (request) => {
+    const { sessionId } = request.cookies
 
-      const transactions = await knex('transactions')
-        .where('session_id', sessionId)
-        .select()
+    const transactions = await knex('transactions')
+      .where('session_id', sessionId)
+      .select()
 
-      return {
-        transactions,
-      }
-    },
-  )
+    return {
+      transactions,
+    }
+  })
 
   app.get('/:id', { preHandler: [checkSessionIdExists] }, async (request) => {
     const getTransactionParamsSchema = z.object({
