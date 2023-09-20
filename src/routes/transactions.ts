@@ -11,6 +11,9 @@ import { checkSessionIdExists } from '../middlewares/check-session-id-exists'
 // front-end: abre a págnia de login, digite o texto diego@rocketseat.com.br no campo com ID email, clique no botão
 // back-end: chamadaas HTTP, WebSockets
 
+// Pirâmide de testes: E2E (não dependem de tecnologia, não dependem de arquitetura)
+// 2000 teste -> Testes E2E -> 16min
+
 export async function transactionsRoutes(app: FastifyInstance) {
   app.get('/', { preHandler: [checkSessionIdExists] }, async (request) => {
     const { sessionId } = request.cookies
